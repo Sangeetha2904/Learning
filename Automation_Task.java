@@ -1,0 +1,107 @@
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+public class Automation_Task {
+	public static void main(String[] args) throws InterruptedException {
+		System.setProperty("webdriver.edge.driver", 
+				"C:\\Users\\sangeetha\\eclipse-workspace\\Selenium_Concepts\\Driver\\msedgedriver.exe");
+		WebDriver wd = new EdgeDriver();
+		wd.get("http://automationpractice.com/index.php");
+		wd.manage().window().maximize();
+		Thread.sleep(2000);
+		WebElement login = wd.findElement(By.xpath("//a[@class='login']"));
+		login.click();
+		JavascriptExecutor js = (JavascriptExecutor) wd;
+		WebElement email = wd.findElement(By.xpath("(//input[@type='text'])[2]"));
+		email.sendKeys("mailtosangiithahariharan2904@gmail.com");
+		WebElement create = wd.findElement(By.id("SubmitCreate"));
+		create.click();
+		wd.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS);
+		js.executeScript("window.scrollBy(0,200)", "");
+		Thread.sleep(3000);
+		WebElement radio = wd.findElement(By.xpath("(//input[@type='radio'])[2]"));
+		boolean selected = radio.isSelected();
+		if (selected==false) {
+			radio.click();
+		}
+		Thread.sleep(3000);
+		WebElement Fname = wd.findElement(By.id("customer_firstname"));
+		Fname.sendKeys("New");
+		Thread.sleep(2000);
+		WebElement Lname = wd.findElement(By.id("customer_lastname"));
+		Lname.sendKeys("User");
+		Thread.sleep(2000);
+		WebElement pwd = wd.findElement(By.id("passwd"));
+		pwd.sendKeys("123456");
+		Thread.sleep(2000);
+		WebElement days = wd.findElement(By.id("days"));
+		Select s = new Select(days);
+		s.selectByValue("29");
+		WebElement months = wd.findElement(By.id("months"));
+		Select s1 = new Select(months);
+		s1.selectByIndex(8);
+		WebElement yrs = wd.findElement(By.id("years"));
+		Select s2 =new Select(yrs);
+		s2.selectByValue("1992");
+		WebElement address = wd.findElement(By.id("address1"));
+		address.sendKeys("No:22, Street lane1, Area, Chennai.");
+		WebElement city = wd.findElement(By.id("city"));
+		city.sendKeys("Chennai");
+		WebElement state = wd.findElement(By.id("id_state"));
+		Select s3 = new Select(state);
+		s3.selectByVisibleText("Indiana");
+		WebElement postcode = wd.findElement(By.id("postcode"));
+		postcode.sendKeys("60009");
+		WebElement country = wd.findElement(By.id("id_country"));
+		Select s4 =new Select(country);
+		s4.selectByVisibleText("United States");
+		WebElement phone = wd.findElement(By.id("phone_mobile"));
+		phone.sendKeys("1234567890");
+		WebElement alias = wd.findElement(By.id("alias"));
+		alias.sendKeys("25,Streetlane5,Chennai");
+		WebElement submit = wd.findElement(By.id("submitAccount"));
+		submit.click();
+		wd.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+		WebElement dresses = wd.findElement(By.xpath("(//a[@title='Dresses'])[2]"));
+		dresses.click();
+		wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		js.executeScript("window.scrollBy(0,1200)","");
+		WebElement dress = wd.findElement(By.xpath("(//a[@title='Printed Chiffon Dress'])[3]"));
+		Actions ac = new Actions(wd);
+		ac.moveToElement(dress).build().perform();
+		Thread.sleep(2000);
+		WebElement cart = wd.findElement(By.xpath("(//span[text()='Add to cart'])[5]"));
+		cart.click();
+		wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		WebElement checkout = wd.findElement(By.xpath("//a[@title='Proceed to checkout']"));
+		checkout.click();
+		wd.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+		js.executeScript("window.scrollBy(0,1000)","");
+		WebElement proceed = wd.findElement(By.xpath("//span[text()='Proceed to checkout']"));
+		proceed.click();
+		wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		js.executeScript("window.scrollBy(0,1500)","");
+		WebElement proceed2 = wd.findElement(By.xpath("(//button[@type='submit'])[2]"));
+		proceed2.click();
+		wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement terms = wd.findElement(By.id("cgv"));
+		terms.click();
+		wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement proceed3 = wd.findElement(By.xpath("(//button[@type='submit'])[2]"));
+		proceed3.click();
+		wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		js.executeScript("window.scrollBy(0,3000)","");
+		WebElement bank = wd.findElement(By.xpath("//a[@class='bankwire']"));
+		bank.click();
+		wd.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement confirm = wd.findElement(By.xpath("//span[text()='I confirm my order']"));
+		confirm.click();	
+}
+}
